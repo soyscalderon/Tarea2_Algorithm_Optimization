@@ -1,46 +1,41 @@
 # Tarea 2 — Análisis y Optimización de Algoritmos
 
-Collection of experiments for the second assignment of the course. The goal is to
-implement several classic algorithms and heuristics, run controlled experiments on
-them, and **compare different approaches to the same problem in terms of time and
-space complexity** using graphs.
+Experiments for the second assignment of the course. Each exercise implements a
+classic algorithm or heuristic and **compares different approaches to the same
+problem in terms of time and quality**, backing the analysis with generated
+graphs.
 
-The emphasis is not on any single algorithm, but on the *comparison*: how a
-different pivot choice, a different greedy criterion, a different starting
-solution, a different cooling schedule, or a different memory trade-off changes
-the observed cost. Results are produced by running the code and are collected as
-figures, so the content of this repository grows as new experiments are added.
+## Contents
 
-## What you will find
-
-- **Implementations** of the algorithms and heuristics used across the exercises,
-  under [`src/algorithms/`](src/algorithms/).
-- **Experiments** that measure runtime, number of operations, memory usage,
-  solution quality, or speedup, depending on the experiment.
-- **Graphs** generated from those measurements, stored in
-  [`resources/graph_pngs/`](resources/graph_pngs), comparing the different
-  approaches of each experiment side by side.
-- The assignment statement in [`instructions.md`](instructions.md) and a short
-  outline of the topics in [`presentation_exercises.md`](presentation_exercises.md).
-
-## Comparisons at a glance
-
-Each experiment contrasts at least two approaches to the same problem:
-
-| Dimension  | What is measured                                        |
-| ---------- | -------------------------------------------------------- |
-| Time       | Runtime, speedup vs. number of processes, number of operations, convergence curves |
-| Space      | Memory usage and number of subproblems actually computed |
-| Quality    | Solution cost, approximation ratio, number of improvements to reach a local optimum |
-
-## Running the experiments
-
-```bash
-./exec.sh
+```
+├── src/        # one script per exercise (1-5)
+├── graphs/     # figures generated with --graph
+├── docs/       # instructions, analysis answers, presentation, demo video
+├── exec.sh     # runs every script
+└── graph.sh    # runs every script with --graph
 ```
 
-or run any experiment module directly with `python3`. Generated figures are
-written to `resources/graph_pngs/`.
+| Script | Experiment | Graph |
+| ------ | ---------- | ----- |
+| `src/1.estimate_pi.py` | Parallel speedup of `estimate_pi` with 1–8+ processes vs. the ideal line | `1.parallel_speedup.png` |
+| `src/2.knapsack.py` | Greedy knapsack: least weight first vs. value/weight ratio | `2.knapsack_greedy.png` |
+| `src/3.TSP.py` | 2-opt local search for the TSP from a random vs. nearest-neighbour start | `3.tsp_2opt_initialization.png` |
+| `src/4.simulated_annealing.py` | Simulated annealing with linear and exponential cooling schedules | `4.sa_convergence.png`, `4.sa_time_vs_quality.png` |
+| `src/5.MST.py` | MST approximation ratio over 100 instances and comparison of TSP methods | `5.mst_approximation_ratio.png`, `5.mst_method_comparison.png` |
 
-> Note: this README describes the project in general terms; sections and figures
-> are updated as the experiments are extended.
+## Running
+
+```bash
+./exec.sh      # run all the experiments (console output)
+./graph.sh     # generate the figures into graphs/
+```
+
+Each script can also be run on its own; the `--graph` flag generates its
+figures:
+
+```bash
+python3 src/1.estimate_pi.py --graph
+```
+
+The assignment statement, the answers to the analysis questions and the
+presentation materials live in [`docs/`](docs/).
