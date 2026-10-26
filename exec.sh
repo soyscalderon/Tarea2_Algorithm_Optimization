@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-for file in ./src/algorithms/*.py; do
+for file in ./src/*.py; do
   clear
   echo "Running $file"
   echo
